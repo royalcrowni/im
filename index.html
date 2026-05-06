@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Manzano | LA SALA DE IGNACIO. El cuadro de los proyectos.</title>
+    <meta name="description" content="LA SALA DE IGNACIO. El cuadro de los proyectos.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="FavIconIM.png">
+    <link rel="apple-touch-icon" href="FavIconIM.png">
+
+    <!-- Open Graph / social sharing preview -->
+    <meta property="og:site_name"   content="Ignacio Manzano">
+    <meta property="og:title"       content="Ignacio Manzano | LA SALA DE IGNACIO. El cuadro de los proyectos.">
+    <meta property="og:description" content="LA SALA DE IGNACIO. El cuadro de los proyectos.">
+    <meta property="og:image"       content="https://www.ignaciomanzano.com/Preview.png">
+    <meta property="og:url"         content="https://www.ignaciomanzano.com">
+    <meta property="og:type"        content="website">
+    <meta name="twitter:card"       content="summary_large_image">
+    <meta name="twitter:title"      content="Ignacio Manzano | LA SALA DE IGNACIO. El cuadro de los proyectos.">
+    <meta name="twitter:description" content="LA SALA DE IGNACIO. El cuadro de los proyectos.">
+    <meta name="twitter:image"      content="https://www.ignaciomanzano.com/Preview.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            touch-action: none;
+            background: #E4E4E4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: var(--body-justify);
+            padding-top: var(--body-pad-top);
+            padding-bottom: var(--body-pad-bottom);
+        }
+
+        /* ── Logo ───────────────────────────────────────────────────── */
+        #logo {
+            display: block;
+            width: auto;
+            height: var(--logo-h);
+            flex-shrink: 0;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* ── Spacer between elements ─────────────────────────────────── */
+        .gap { flex-shrink: 0; height: var(--gap); }
+
+        /* ── Painting frame container ────────────────────────────────── */
+        /*
+         * #painting-frame is sized to the FRAME image aspect (4650 / 3045).
+         * The room images live inside #room, inset at the frame's inner opening:
+         *   left: 13%  top: 13.7%  width: 74%  height: 72.6%
+         * These values produce the same aspect ratio as the room images (4692/3018),
+         * so all layers fill their container perfectly without distortion.
+         */
+        #painting-frame {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Room: inset within frame's transparent opening */
+        #room {
+            position: absolute;
+            left:   13%;
+            top:    13.7%;
+            width:  74%;
+            height: 72.6%;
+            overflow: hidden;
+        }
+
+        .layer {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .overlay {
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+        .overlay.active { opacity: 1; }
+
+        /* Hotspot zones — % of #room (= % of room image 4692 × 3018) */
+        .hotspot {
+            position: absolute;
+            cursor: pointer;
+            z-index: 20;
+            /* Debug zones: outline: 2px solid rgba(255,255,0,0.5); */
+        }
+        #hot1 { left: 47%;   top: 57%;  width: 22%;   height: 14%;  }
+        #hot2 { left: 25%;   top: 40%;  width: 8.5%;  height: 35%;  }
+        #hot3 { left: 8%;    top: 16%;  width: 7%;    height: 11%;  }
+        #hot4 { left: 5%;    top: 56%;  width: 4.5%;  height: 10%;  }
+        #hot5 { left: 77.5%; top: 22%;  width: 9%;    height: 7.5%; }
+        #hot6 { left: 18%;   top: 50%;  width: 6%;    height: 12%;  }
+
+        /* Frame image sits on top of everything */
+        #frame-img {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            display: block;
+            z-index: 30;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* ── Plaque ─────────────────────────────────────────────────── */
+        #plaque-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            width: var(--plaque-w);
+        }
+
+        #plaque-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* plaque text removed — text is baked into ChapaIM.png */
+    </style>
+</head>
+<body>
+
+    <img id="logo" src="LogoIM.svg" alt="Ignacio Manzano" draggable="false">
+
+    <div id="gap-logo"></div>
+
+    <div id="painting-frame">
+
+        <div id="room">
+            <img class="layer" src="0BackIM.png"        alt="" draggable="false">
+            <img class="layer overlay" id="overlay1" src="1BogavanteIM.png" alt="" draggable="false">
+            <img class="layer overlay" id="overlay2" src="2IMIM.png"        alt="" draggable="false">
+            <img class="layer overlay" id="overlay3" src="3NewsIM.png"      alt="" draggable="false">
+            <img class="layer overlay" id="overlay4" src="4PintIM.png"      alt="" draggable="false">
+            <img class="layer overlay" id="overlay5" src="5CondaIM.png"     alt="" draggable="false">
+            <img class="layer overlay" id="overlay6" src="6ManzanoIM.png"   alt="" draggable="false">
+
+            <div class="hotspot" id="hot1" data-overlay="overlay1" data-url="https://www.bogavante.ai"></div>
+            <div class="hotspot" id="hot2" data-overlay="overlay2" data-url="https://www.ignacio.info"></div>
+            <div class="hotspot" id="hot3" data-overlay="overlay3" data-url="https://www.manzano.cc/ai-news"></div>
+            <div class="hotspot" id="hot4" data-overlay="overlay4" data-url="https://www.tmanzano.com"></div>
+            <div class="hotspot" id="hot5" data-overlay="overlay5" data-url="https://www.condabichi.com"></div>
+            <div class="hotspot" id="hot6" data-overlay="overlay6" data-url="https://www.manzano.cc"></div>
+        </div>
+
+        <img id="frame-img" src="Cuadro.png" alt="" draggable="false">
+
+    </div>
+
+    <div id="gap-plaque"></div>
+
+    <div id="plaque-wrapper">
+        <img id="plaque-img" src="ChapaIM.png" alt="" draggable="false">
+    </div>
+
+<script>
+    // Frame image native aspect ratio
+    const FRAME_ASPECT = 4650 / 3045;   // ≈ 1.5271
+    // Plaque native aspect ratio
+    const PLAQUE_ASPECT = 4332 / 1692;  // ≈ 2.559
+
+    const root         = document.documentElement;
+    const paintingFrame = document.getElementById('painting-frame');
+
+    function resize() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const isMobile = vw < 768;
+
+        // ── Layout direction & padding ────────────────────────────────
+        // Desktop: anchor to top with padding so logo sits ~10% from top.
+        // Mobile:  vertically centered, tighter padding.
+        if (isMobile) {
+            root.style.setProperty('--body-justify',    'flex-start');
+            root.style.setProperty('--body-pad-top',    '3vh');
+            root.style.setProperty('--body-pad-bottom', '3vh');
+        } else {
+            root.style.setProperty('--body-justify',    'flex-start');
+            root.style.setProperty('--body-pad-top',    '5vh');
+            root.style.setProperty('--body-pad-bottom', '3vh');
+        }
+
+        // ── Component sizes ───────────────────────────────────────────
+        const logoH      = isMobile ? 78  : 98;
+        const gapLogo    = isMobile ? 45  : 8;   // mobile: big gap pushes painting+plaque down
+        const gapPlaque  = isMobile ? 5   : 8;
+        const plaqueW    = isMobile ? 118 : 128; // desktop plaque a bit smaller
+
+        root.style.setProperty('--logo-h',   logoH + 'px');
+        root.style.setProperty('--plaque-w', plaqueW + 'px');
+        document.getElementById('gap-logo').style.height   = gapLogo + 'px';
+        document.getElementById('gap-plaque').style.height = gapPlaque + 'px';
+
+        // ── Frame size — MUCH smaller than before ─────────────────────
+        // Target: frame width ≈ 43 % of viewport width (desktop)
+        //         frame height ≈ 52 % of viewport height (desktop)
+        // Use the smaller of the two to guarantee it fits in both axes.
+        const maxByW = vw * (isMobile ? 0.87 : 0.43);
+        const maxByH = vh * (isMobile ? 0.60 : 0.52);
+
+        // Which constraint is tighter?
+        let frameW = maxByW;
+        let frameH = frameW / FRAME_ASPECT;
+        if (frameH > maxByH) {
+            frameH = maxByH;
+            frameW = frameH * FRAME_ASPECT;
+        }
+
+        paintingFrame.style.width  = frameW + 'px';
+        paintingFrame.style.height = frameH + 'px';
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    // ── Hotspot interactions ─────────────────────────────────────────
+    let activeOverlay = null;
+
+    document.querySelectorAll('.hotspot').forEach(function(hot) {
+        const overlay = document.getElementById(hot.dataset.overlay);
+        const url     = hot.dataset.url;
+
+        hot.addEventListener('mouseenter', function() {
+            if (activeOverlay && activeOverlay !== overlay) {
+                activeOverlay.classList.remove('active');
+            }
+            overlay.classList.add('active');
+            activeOverlay = overlay;
+        });
+
+        hot.addEventListener('mouseleave', function() {
+            overlay.classList.remove('active');
+            activeOverlay = null;
+        });
+
+        hot.addEventListener('click', function() {
+            window.open(url, '_blank');
+        });
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('hotspot') && activeOverlay) {
+            activeOverlay.classList.remove('active');
+            activeOverlay = null;
+        }
+    });
+
+    // Block scroll but allow pinch-to-zoom (multi-touch)
+    document.addEventListener('wheel', function(e) { e.preventDefault(); }, { passive: false });
+    document.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 1) e.preventDefault(); // single finger = scroll → block
+        // two fingers (pinch zoom) → allow
+    }, { passive: false });
+</script>
+
+</body>
+</html>
