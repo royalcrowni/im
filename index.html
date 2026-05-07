@@ -166,7 +166,7 @@
     <div id="gap-plaque"></div>
 
     <div id="plaque-wrapper">
-        <img id="plaque-img" src="ChapaIM.png" alt="" draggable="false">
+        <img id="plaque-img" src="ChapaIM.png?v=2" alt="" draggable="false">
     </div>
 
 <script>
@@ -261,12 +261,7 @@
         }
     });
 
-    // Block scroll but allow pinch-to-zoom (multi-touch)
-    document.addEventListener('wheel', function(e) { e.preventDefault(); }, { passive: false });
-    document.addEventListener('touchmove', function(e) {
-        if (e.touches.length === 1) e.preventDefault(); // single finger = scroll → block
-        // two fingers (pinch zoom) → allow
-    }, { passive: false });
+    // Scroll and zoom fully enabled
 </script>
 
 </body>
