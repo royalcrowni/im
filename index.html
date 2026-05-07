@@ -26,9 +26,7 @@
 
         html, body {
             width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            touch-action: none;
+            min-height: 100vh;
             background: #E4E4E4;
             display: flex;
             flex-direction: column;
@@ -200,7 +198,7 @@
         const logoH      = isMobile ? 78  : 98;
         const gapLogo    = isMobile ? 45  : 8;   // mobile: big gap pushes painting+plaque down
         const gapPlaque  = isMobile ? 5   : 8;
-        const plaqueW    = isMobile ? 118 : 128; // desktop plaque a bit smaller
+        const plaqueW    = isMobile ? 100 : 112;
 
         root.style.setProperty('--logo-h',   logoH + 'px');
         root.style.setProperty('--plaque-w', plaqueW + 'px');
