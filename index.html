@@ -234,33 +234,69 @@
 
     // ── Hotspot interactions ─────────────────────────────────────────
     let activeOverlay = null;
+    let activeHot     = null;
+    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
 
     document.querySelectorAll('.hotspot').forEach(function(hot) {
         const overlay = document.getElementById(hot.dataset.overlay);
         const url     = hot.dataset.url;
 
+        // ── Desktop: hover shows overlay, click opens URL ────────────
         hot.addEventListener('mouseenter', function() {
+            if (isTouchDevice()) return;
             if (activeOverlay && activeOverlay !== overlay) {
                 activeOverlay.classList.remove('active');
             }
             overlay.classList.add('active');
             activeOverlay = overlay;
+            activeHot     = hot;
         });
 
         hot.addEventListener('mouseleave', function() {
+            if (isTouchDevice()) return;
             overlay.classList.remove('active');
             activeOverlay = null;
+            activeHot     = null;
         });
 
         hot.addEventListener('click', function() {
+            if (isTouchDevice()) return;
             window.open(url, '_blank');
+        });
+
+        // ── Mobile: first tap shows overlay, second tap opens URL ────
+        hot.addEventListener('touchend', function(e) {
+            if (!isTouchDevice()) return;
+            e.preventDefault();
+
+            if (activeHot === hot) {
+                // Already showing — second tap → navigate
+                window.open(url, '_blank');
+            } else {
+                // First tap → show overlay, hide any previous
+                if (activeOverlay) activeOverlay.classList.remove('active');
+                overlay.classList.add('active');
+                activeOverlay = overlay;
+                activeHot     = hot;
+            }
         });
     });
 
-    document.addEventListener('click', function(e) {
+    // Tapping outside a hotspot hides the active overlay
+    document.addEventListener('touchend', function(e) {
         if (!e.target.classList.contains('hotspot') && activeOverlay) {
             activeOverlay.classList.remove('active');
             activeOverlay = null;
+            activeHot     = null;
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (isTouchDevice()) return;
+        if (!e.target.classList.contains('hotspot') && activeOverlay) {
+            activeOverlay.classList.remove('active');
+            activeOverlay = null;
+            activeHot     = null;
         }
     });
 
