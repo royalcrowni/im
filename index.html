@@ -225,7 +225,12 @@
     }
 
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', function() {
+        // If the user is pinch-zoomed on mobile, skip resize so the
+        // painting doesn't shrink to fit the zoomed viewport.
+        if (window.visualViewport && window.visualViewport.scale > 1) return;
+        resize();
+    });
 
     // ── Hotspot interactions ─────────────────────────────────────────
     let activeOverlay = null;
