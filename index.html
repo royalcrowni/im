@@ -48,10 +48,10 @@
       min-height: 100vh;
     }
 
-    /* ── HEADER fijo arriba ── */
+    /* HEADER */
     .site-header {
       position: fixed;
-      top: 36px;
+      top: 32px;
       left: 0; right: 0;
       text-align: center;
       z-index: 10;
@@ -64,7 +64,7 @@
       text-transform: uppercase;
     }
 
-    /* ── SVG al 40% ── */
+    /* LOGO */
     .stamp-wrap {
       position: fixed;
       top: 40%;
@@ -72,12 +72,12 @@
       transform: translate(-50%, -50%);
     }
     .stamp-img {
-      width: 220px;
+      width: 260px;
       height: auto;
       display: block;
     }
 
-    /* ── NAV al 68% ── */
+    /* NAV */
     .nav-wrap {
       position: fixed;
       top: 68%;
@@ -88,10 +88,14 @@
     }
     .nav-links {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       gap: 0 40px;
+    }
+    /* En desktop las filas se comportan como inline */
+    .nav-links .row1,
+    .nav-links .row2 {
+      display: contents;
     }
     .nav-links a {
       color: #BFAA78;
@@ -108,7 +112,7 @@
     .nav-links a.regular { font-weight: 400; }
     .nav-links a.light   { font-weight: 300; }
 
-    /* ── FOOTER fijo abajo ── */
+    /* FOOTER */
     .site-footer {
       position: fixed;
       bottom: 28px;
@@ -124,50 +128,53 @@
       text-transform: uppercase;
     }
 
-    /* ── iPad ── */
+    /* iPad */
     @media (min-width: 768px) and (max-width: 1024px) {
-      .stamp-img { width: 200px; }
+      .stamp-img { width: 230px; }
       .nav-links { gap: 0 36px; }
     }
 
-    /* ── Desktop ── */
+    /* Desktop */
     @media (min-width: 1025px) {
-      .stamp-img { width: 220px; }
+      .stamp-img { width: 260px; }
       .nav-links { gap: 0 40px; }
     }
 
-    /* ── MÓVIL: replica exacta de la foto ── */
+    /* MÓVIL */
     @media (max-width: 767px) {
-      .site-header { top: 52px; }
-      .site-name { font-size: 11px; letter-spacing: 0.18em; }
+      .site-header { top: 48px; }
+      .site-name { font-size: 10px; letter-spacing: 0.15em; }
 
-      /* Logo ocupa casi todo el ancho */
-      .stamp-wrap {
-        top: 38%;
-      }
-      .stamp-img {
-        width: 82vw;
-        max-width: 340px;
-      }
+      .stamp-wrap { top: 42%; }
+      .stamp-img { width: 55vw; }
 
-      /* Nav en el 74% — debajo del logo con espacio generoso */
       .nav-wrap {
-        top: 74%;
-        width: 90%;
-        left: 5%;
+        top: 71%;
+        width: 100%;
+        left: 0;
         transform: none;
       }
       .nav-links {
-        gap: 12px 40px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+      .nav-links .row1 {
+        display: flex;
+        gap: 0 28px;
+        margin-bottom: 10px;
+      }
+      .nav-links .row2 {
+        display: flex;
+        gap: 0 28px;
       }
       .nav-links a {
-        font-size: 13px;
-        letter-spacing: 0.08em;
+        font-size: 8px;
+        letter-spacing: 0.06em;
       }
 
-      .site-footer { bottom: 36px; }
-      .footer-text { font-size: 11px; letter-spacing: 0.12em; }
+      .site-footer { bottom: 44px; }
+      .footer-text { font-size: 9px; }
     }
   </style>
 </head>
@@ -180,7 +187,7 @@
   <div class="stamp-wrap">
     <img
       class="stamp-img"
-      src="ignacio-manzano-stmp.svg"
+      src="ignacio-manzano-logo.png"
       alt="Ignacio Manzano"
       draggable="false"
     />
@@ -188,11 +195,15 @@
 
   <div class="nav-wrap">
     <nav class="nav-links">
-      <a href="https://www.condabichi.com"  class="bold"    target="_blank" rel="noopener">Condabichi</a>
-      <a href="https://www.manzano.cc"      class="medium"  target="_blank" rel="noopener">Manzanocc</a>
-      <a href="https://www.ignacio.info"    class="regular" target="_blank" rel="noopener">Ignacio-info</a>
-      <a href="https://www.aigea.org"       class="regular" target="_blank" rel="noopener">Aigea</a>
-      <a href="https://www.1492.vc"         class="light"   target="_blank" rel="noopener">1492.vc</a>
+      <div class="row1">
+        <a href="https://www.condabichi.com"  class="bold"    target="_blank" rel="noopener">Condabichi</a>
+        <a href="https://www.manzano.cc"      class="medium"  target="_blank" rel="noopener">Manzanocc</a>
+        <a href="https://www.ignacio.info"    class="regular" target="_blank" rel="noopener">Ignacio-info</a>
+      </div>
+      <div class="row2">
+        <a href="https://www.aigea.org"       class="regular" target="_blank" rel="noopener">Aigea</a>
+        <a href="https://www.1492.vc"         class="light"   target="_blank" rel="noopener">1492.vc</a>
+      </div>
     </nav>
   </div>
 
